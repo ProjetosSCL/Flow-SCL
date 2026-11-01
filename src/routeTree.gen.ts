@@ -10,10 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TabelaOperacionalRouteImport } from './routes/tabela-operacional'
-import { Route as SlaRouteImport } from './routes/sla'
 import { Route as RelatoriosRouteImport } from './routes/relatorios'
-import { Route as PrestadoresRouteImport } from './routes/prestadores'
-import { Route as OsCriticasRouteImport } from './routes/os-criticas'
 import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,24 +20,9 @@ const TabelaOperacionalRoute = TabelaOperacionalRouteImport.update({
   path: '/tabela-operacional',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SlaRoute = SlaRouteImport.update({
-  id: '/sla',
-  path: '/sla',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const RelatoriosRoute = RelatoriosRouteImport.update({
   id: '/relatorios',
   path: '/relatorios',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrestadoresRoute = PrestadoresRouteImport.update({
-  id: '/prestadores',
-  path: '/prestadores',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OsCriticasRoute = OsCriticasRouteImport.update({
-  id: '/os-criticas',
-  path: '/os-criticas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndicadoresRoute = IndicadoresRouteImport.update({
@@ -63,20 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/indicadores': typeof IndicadoresRoute
-  '/os-criticas': typeof OsCriticasRoute
-  '/prestadores': typeof PrestadoresRoute
   '/relatorios': typeof RelatoriosRoute
-  '/sla': typeof SlaRoute
   '/tabela-operacional': typeof TabelaOperacionalRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/indicadores': typeof IndicadoresRoute
-  '/os-criticas': typeof OsCriticasRoute
-  '/prestadores': typeof PrestadoresRoute
   '/relatorios': typeof RelatoriosRoute
-  '/sla': typeof SlaRoute
   '/tabela-operacional': typeof TabelaOperacionalRoute
 }
 export interface FileRoutesById {
@@ -84,10 +60,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/indicadores': typeof IndicadoresRoute
-  '/os-criticas': typeof OsCriticasRoute
-  '/prestadores': typeof PrestadoresRoute
   '/relatorios': typeof RelatoriosRoute
-  '/sla': typeof SlaRoute
   '/tabela-operacional': typeof TabelaOperacionalRoute
 }
 export interface FileRouteTypes {
@@ -96,30 +69,21 @@ export interface FileRouteTypes {
     | '/'
     | '/configuracoes'
     | '/indicadores'
-    | '/os-criticas'
-    | '/prestadores'
     | '/relatorios'
-    | '/sla'
     | '/tabela-operacional'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/configuracoes'
     | '/indicadores'
-    | '/os-criticas'
-    | '/prestadores'
     | '/relatorios'
-    | '/sla'
     | '/tabela-operacional'
   id:
     | '__root__'
     | '/'
     | '/configuracoes'
     | '/indicadores'
-    | '/os-criticas'
-    | '/prestadores'
     | '/relatorios'
-    | '/sla'
     | '/tabela-operacional'
   fileRoutesById: FileRoutesById
 }
@@ -127,10 +91,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ConfiguracoesRoute: typeof ConfiguracoesRoute
   IndicadoresRoute: typeof IndicadoresRoute
-  OsCriticasRoute: typeof OsCriticasRoute
-  PrestadoresRoute: typeof PrestadoresRoute
   RelatoriosRoute: typeof RelatoriosRoute
-  SlaRoute: typeof SlaRoute
   TabelaOperacionalRoute: typeof TabelaOperacionalRoute
 }
 
@@ -143,32 +104,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TabelaOperacionalRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sla': {
-      id: '/sla'
-      path: '/sla'
-      fullPath: '/sla'
-      preLoaderRoute: typeof SlaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/relatorios': {
       id: '/relatorios'
       path: '/relatorios'
       fullPath: '/relatorios'
       preLoaderRoute: typeof RelatoriosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/prestadores': {
-      id: '/prestadores'
-      path: '/prestadores'
-      fullPath: '/prestadores'
-      preLoaderRoute: typeof PrestadoresRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/os-criticas': {
-      id: '/os-criticas'
-      path: '/os-criticas'
-      fullPath: '/os-criticas'
-      preLoaderRoute: typeof OsCriticasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/indicadores': {
@@ -199,10 +139,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ConfiguracoesRoute: ConfiguracoesRoute,
   IndicadoresRoute: IndicadoresRoute,
-  OsCriticasRoute: OsCriticasRoute,
-  PrestadoresRoute: PrestadoresRoute,
   RelatoriosRoute: RelatoriosRoute,
-  SlaRoute: SlaRoute,
   TabelaOperacionalRoute: TabelaOperacionalRoute,
 }
 export const routeTree = rootRouteImport

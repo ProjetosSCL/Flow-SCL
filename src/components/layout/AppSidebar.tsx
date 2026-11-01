@@ -2,7 +2,12 @@ import { Link } from "@tanstack/react-router";
 import { navItems } from "@/components/layout/nav-items";
 
 /** Rails verticais em pílula (SCL-design · quixotic-dash). Visíveis a partir de md. */
-const groups = [navItems.slice(0, 4), navItems.slice(4, 8), navItems.slice(8)];
+const byTo = (tos: string[]) => navItems.filter((it) => tos.includes(it.to));
+const groups = [
+  byTo(["/", "/tabela-operacional", "/ranking-vencimentos", "/relatorios"]),
+  byTo(["/indicadores"]),
+  byTo(["/configuracoes"]),
+];
 
 export function AppSidebar() {
   return (
