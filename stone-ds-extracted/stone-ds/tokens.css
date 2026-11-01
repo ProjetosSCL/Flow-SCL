@@ -1,0 +1,61 @@
+/* ===== Stone Design System — tokens.css ===== */
+@font-face{font-family:"ABC Gravity";src:url("./fonts/Gravity-Normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"ABC Gravity Condensed";src:url("./fonts/Gravity-Condensed.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"ABC Gravity Compressed";src:url("./fonts/Gravity-Compressed.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"ABC Gravity Extended";src:url("./fonts/Gravity-Extended.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Roobert";font-weight:400;src:url("./fonts/Roobert-Regular.otf") format("opentype");font-display:swap}
+@font-face{font-family:"Roobert";font-weight:500;src:url("./fonts/Roobert-Medium.otf") format("opentype");font-display:swap}
+@font-face{font-family:"Roobert";font-weight:600;src:url("./fonts/Roobert-SemiBold.otf") format("opentype");font-display:swap}
+@font-face{font-family:"Roobert";font-weight:700;src:url("./fonts/Roobert-Bold.otf") format("opentype");font-display:swap}
+@font-face{font-family:"Roobert";font-weight:800;src:url("./fonts/Roobert-Heavy.otf") format("opentype");font-display:swap}
+@font-face{font-family:"Inter";font-weight:100 900;src:url("./fonts/Inter-Variable.ttf") format("truetype");font-display:swap}
+
+:root{
+  /* Marca (Stone) */
+  --green:#00D700;        /* Verde Stone */
+  --green-dark:#00461E;   /* Verde Escuro */
+  --green-700:#007D00;    /* Verde escuro 2 */
+  --green-300:#87FF4B;    /* Verde claro 2 */
+  --green-200:#D2FF7D;    /* Verde claro 1 */
+  --lime:#A5FA00;         /* Verde vibrante */
+  --black:#1E281E;
+  --gray-0:#F5FFF5; --gray-1:#C8D2C8; --gray-2:#96A096; --gray-3:#505A50;
+
+  /* Secundárias (médio / claro / escuro) */
+  --teal:#008267;   --teal-l:#0FE2B9;   --teal-d:#015A46;
+  --cyan:#217D91;   --cyan-l:#1DD2FF;   --cyan-d:#014B56;
+  --blue:#235096;   --blue-l:#1E7DFF;   --blue-d:#002854;
+  --magenta:#AF008C;--magenta-l:#FF1EEC;--magenta-d:#73055E;
+  --pink:#CD3773;   --pink-l:#FF3D96;   --pink-d:#7C0A3D;
+  --red:#F54141;    --red-l:#FE1413;    --red-d:#950505;
+  --orange:#FF8232; --orange-l:#FFA53C; --orange-d:#A0460A;
+  --yellow:#F0C828; --yellow-l:#FFEB42; --yellow-d:#D6A500;
+
+  /* Tints StoneCo (fundos suaves de badges/cards) */
+  --tint-mint:#DDFFE3; --tint-lilac:#DEDEFF; --tint-rose:#FFD6DE; --tint-sand:#FFEAC0;
+  --co-green:#94EA62; --co-green-2:#41D600; --co-dark:#103024; --co-violet:#9766FF;
+
+  /* Semânticos */
+  --bg:#ECF1EB;            /* fundo da página (derivado: entre gray-0 e gray-1) */
+  --surface:#FFFFFF;
+  --border:#DDE5DC;
+  --text:var(--black); --text-muted:var(--gray-3); --text-soft:var(--gray-2);
+  --primary:var(--green); --on-primary:var(--black);
+  --primary-strong:var(--green-dark); --on-primary-strong:#fff;
+  --success:var(--green-700); --success-bg:var(--tint-mint);
+  --warning:var(--orange-d);  --warning-bg:var(--tint-sand);
+  --danger:var(--red-d);      --danger-bg:var(--tint-rose);
+  --info:var(--blue);         --info-bg:var(--tint-lilac);
+
+  /* Tipografia */
+  --font-display:"ABC Gravity","Roobert",system-ui,sans-serif;
+  --font-ui:"Roobert","Inter",system-ui,sans-serif;
+  --font-data:"Inter",system-ui,sans-serif;
+  --fs-xs:12px; --fs-sm:13px; --fs-md:15px; --fs-lg:18px; --fs-xl:24px; --fs-2xl:32px; --fs-3xl:44px;
+
+  /* Espaço, raio, sombra */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px;
+  --r-sm:10px; --r-md:16px; --r-lg:24px; --r-pill:999px;
+  --shadow:0 1px 2px rgba(30,40,30,.04),0 8px 24px rgba(30,40,30,.06);
+  --focus:0 0 0 3px rgba(0,215,0,.35);
+}

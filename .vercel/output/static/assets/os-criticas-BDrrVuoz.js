@@ -1,0 +1,1 @@
+import{j as e}from"./index-DWELUpE7.js";import{P as o}from"./Placeholder-pVan_TmT.js";const s=()=>e.jsxDEV(o,{title:"OS Críticas",description:"Lista priorizada de OS vencidas, vence hoje e emergenciais."},void 0,!1,{fileName:"/app/applet/src/routes/os-criticas.tsx?tsr-split=component",lineNumber:2,columnNumber:30},void 0);export{s as component};

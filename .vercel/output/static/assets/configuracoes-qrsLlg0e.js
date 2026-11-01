@@ -1,0 +1,1 @@
+import{j as e}from"./index-DWELUpE7.js";import{P as o}from"./Placeholder-pVan_TmT.js";const s=()=>e.jsxDEV(o,{title:"Configurações",description:"Preferências da operação, alertas e integrações."},void 0,!1,{fileName:"/app/applet/src/routes/configuracoes.tsx?tsr-split=component",lineNumber:2,columnNumber:30},void 0);export{s as component};

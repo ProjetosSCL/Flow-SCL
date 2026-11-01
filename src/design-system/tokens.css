@@ -1,0 +1,155 @@
+/* ===== StoneCo DS — tokens.css =====
+   Paleta extraída do brand.stone.br (Cores principais, secundárias e cinzas).
+   Fontes: ABC Gravity (display), Roobert (interface), Inter (dados). */
+
+@font-face {
+  font-family: "ABC Gravity";
+  src:
+    url("/fonts/Gravity-Normal.woff2") format("woff2"),
+    url("./fonts/Gravity-Normal.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "ABC Gravity Condensed";
+  src:
+    url("/fonts/Gravity-Condensed.woff2") format("woff2"),
+    url("./fonts/Gravity-Condensed.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "ABC Gravity Compressed";
+  src:
+    url("/fonts/Gravity-Compressed.woff2") format("woff2"),
+    url("./fonts/Gravity-Compressed.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "ABC Gravity Extended";
+  src:
+    url("/fonts/Gravity-Extended.woff2") format("woff2"),
+    url("./fonts/Gravity-Extended.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roobert";
+  font-weight: 400;
+  src:
+    url("/fonts/Roobert-Regular.otf") format("opentype"),
+    url("./fonts/Roobert-Regular.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roobert";
+  font-weight: 500;
+  src:
+    url("/fonts/Roobert-Medium.otf") format("opentype"),
+    url("./fonts/Roobert-Medium.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roobert";
+  font-weight: 600;
+  src:
+    url("/fonts/Roobert-SemiBold.otf") format("opentype"),
+    url("./fonts/Roobert-SemiBold.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roobert";
+  font-weight: 700;
+  src:
+    url("/fonts/Roobert-Bold.otf") format("opentype"),
+    url("./fonts/Roobert-Bold.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roobert";
+  font-weight: 800;
+  src:
+    url("/fonts/Roobert-Heavy.otf") format("opentype"),
+    url("./fonts/Roobert-Heavy.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  font-weight: 100 900;
+  src:
+    url("/fonts/Inter-Variable.ttf") format("truetype"),
+    url("./fonts/Inter-Variable.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  /* Principais */
+  --green: #94ea62; /* Verde principal   · acento, tendência, destaque */
+  --green-strong: #41d600; /* Verde secundário  · ação positiva, foco, linhas de gráfico */
+  --mint: #ddffe3; /* Menta   · fundo de sucesso */
+  --lilac: #dedeff; /* Lilás   · fundo de informação */
+  --rose: #ffd6de; /* Rosa    · fundo de erro */
+  --sand: #ffeac0; /* Amarelo · fundo de atenção */
+  --gray-light: #d7e1de; /* Cinza claro  · superfícies neutras, divisores */
+  --gray-dark: #2b2d2c; /* Cinza escuro · texto principal */
+
+  /* Secundárias */
+  --green-light: #bce9a6;
+  --green-dark: #103024; /* Verde escuro · botões primários, item ativo, cartão */
+  --aqua: #8cead4; /* Azul 1 */
+  --violet: #9766ff; /* Roxo 1 */
+  --pink: #ff7a98; /* Rosa 1 */
+  --yellow: #e1cf4b; /* Amarelo 1 */
+
+  /* Escala de cinzas */
+  --gray-1: #c7d5d1;
+  --gray-2: #a3bbb6;
+  --gray-3: #808683;
+  --gray-4: #666d6a;
+
+  /* Semânticos */
+  --bg: #ecf1ef; /* fundo da página: cinza claro clareado */
+  --surface: #ffffff;
+  --surface-2: #f4f7f6; /* linha ativa, campos, trilhos */
+  --border: #dfe7e4;
+  --text: var(--gray-dark);
+  --text-muted: var(--gray-4);
+  --text-soft: var(--gray-3);
+
+  --primary: var(--green-dark);
+  --on-primary: #ffffff;
+  --accent: var(--green);
+  --on-accent: var(--green-dark);
+  --success: #1f7a1f;
+  --success-bg: var(--mint);
+  --warning: #8a5a00;
+  --warning-bg: var(--sand);
+  --danger: #b3263f;
+  --danger-bg: var(--rose);
+  --info: #4b35b8;
+  --info-bg: var(--lilac);
+
+  /* Tipografia */
+  --font-display: "ABC Gravity", "Roobert", system-ui, sans-serif;
+  --font-ui: "Roobert", "Inter", system-ui, sans-serif;
+  --font-data: "Inter", system-ui, sans-serif;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-md: 15px;
+  --fs-lg: 18px;
+  --fs-xl: 24px;
+  --fs-2xl: 34px;
+  --fs-3xl: 48px;
+
+  /* Espaço, raio, sombra */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --r-sm: 12px;
+  --r-md: 20px;
+  --r-lg: 28px;
+  --r-pill: 999px;
+  --shadow: 0 1px 2px rgba(16, 48, 36, 0.04), 0 10px 28px rgba(16, 48, 36, 0.06);
+  --focus: 0 0 0 3px rgba(65, 214, 0, 0.4);
+}

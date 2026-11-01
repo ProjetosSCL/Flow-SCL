@@ -1,0 +1,1 @@
+import{j as e}from"./index-DWELUpE7.js";import{P as o}from"./Placeholder-pVan_TmT.js";const n=()=>e.jsxDEV(o,{title:"Indicadores de SLA",description:"Acompanhamento detalhado de SLA por contrato, prestador e região."},void 0,!1,{fileName:"/app/applet/src/routes/sla.tsx?tsr-split=component",lineNumber:2,columnNumber:30},void 0);export{n as component};

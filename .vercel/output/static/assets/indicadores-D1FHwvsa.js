@@ -1,0 +1,1 @@
+import{j as e}from"./index-DWELUpE7.js";import{P as o}from"./Placeholder-pVan_TmT.js";const s=()=>e.jsxDEV(o,{title:"Indicadores",description:"Painel completo de KPIs operacionais e de campo."},void 0,!1,{fileName:"/app/applet/src/routes/indicadores.tsx?tsr-split=component",lineNumber:2,columnNumber:30},void 0);export{s as component};

@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Tokens do design system StoneCo — extraídos de brand.stone.br
+   Paleta: Verde principal (#94EA62), Verde escuro (#103024), Verde forte (#41D600)
+   Status: Menta (#DDFFE3), Areia (#FFEAC0), Rosa (#FFD6DE), Lilás (#DEDEFF)
+   Fontes: ABC Gravity (display), Roobert (interface/corpo), Inter (dados/numéricos)
+   ========================================================================== */
+
+@theme {
+  /* Superfícies */
+  --color-q-page: #ecf1ef;
+  --color-q-frame: #d7e1de;
+  --color-q-card: #ffffff;
+  --color-q-soft: #f4f7f6;
+  --color-q-row: #f4f7f6;
+  --color-q-line: #dfe7e4;
+
+  /* Verde StoneCo */
+  --color-q-green: #103024;
+  --color-q-green-accent: #94ea62;
+  --color-q-green-strong: #41d600;
+  --color-q-green-deep: #0b2219;
+  --color-q-green-tint: #ddffe3;
+  --color-q-green-stripe: #bce9a6;
+
+  /* Texto e ícone sobre o verde principal */
+  --color-q-on-green: #ffffff;
+  --color-q-on-green-accent: #103024;
+
+  /* Texto direto sobre a moldura */
+  --color-q-on-frame: #2b2d2c;
+  --color-q-on-frame-muted: #666d6a;
+
+  /* Texto */
+  --color-q-ink: #2b2d2c;
+  --color-q-muted: #666d6a;
+  --color-q-soft-text: #808683;
+
+  /* Cores de Status StoneCo */
+  --color-q-mint: #ddffe3;
+  --color-q-sand: #ffeac0;
+  --color-q-rose: #ffd6de;
+  --color-q-lilac: #dedeff;
+
+  /* Pilares do pódio */
+  --color-q-podium-1: #94ea62;
+  --color-q-podium-2: #bce9a6;
+  --color-q-podium-3: #ddffe3;
+
+  /* Raios */
+  --radius-q-frame: 28px;
+  --radius-q-card: 28px;
+  --radius-q-pill: 999px;
+
+  /* Tipografia StoneCo */
+  --font-q: "Roobert", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-q-display: "ABC Gravity", "Roobert", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-q-data: "Inter", monospace, sans-serif;
+}
+
+/* Listras diagonais das barras (gráfico e barras de desempenho) */
+.q-stripes {
+  background-color: var(--color-q-green-stripe, #bce9a6);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgb(255 255 255 / 0.55) 0 2px,
+    transparent 2px 7px
+  );
+}

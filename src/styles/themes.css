@@ -1,0 +1,222 @@
+/* ==========================================================================
+   themes.css — temas alternativos do design system Stone · Resultados
+   Uso: importe DEPOIS de quixotic-tokens.css e troque com
+        <html data-theme="stone-escuro"> (remova o atributo para o tema padrão).
+   Requer os tokens: --color-q-on-green, --color-q-on-frame,
+   --color-q-on-frame-muted e --color-q-podium-1/2/3 (definidos em DESIGN.md §3).
+   O tema padrão (Stone Vibrante) fica no @theme de quixotic-tokens.css.
+   ========================================================================== */
+
+/* ==========================================================================
+   TEMAS — troque com <html data-theme="menta | folha | floresta">
+   ========================================================================== */
+
+/* A) Menta Viva — próximo da referência: fundo menta, pilares verde vivo e lima */
+:root[data-theme="menta"],
+[data-theme="menta"] {
+  --color-q-green: #108652;
+  --color-q-green-deep: #0a6b40;
+  --color-q-page: #c4f3c9;
+  --color-q-frame: #d4f9d8;
+  --color-q-soft: #e4fbe7;
+  --color-q-row: #ecfcee;
+  --color-q-line: #bfe9c5;
+  --color-q-green-tint: #d3f5d8;
+  --color-q-green-stripe: #7fc796;
+  --color-q-ink: #0c1f13;
+  --color-q-muted: #4f7359;
+  --color-q-podium-1: #72f159;
+  --color-q-podium-2: #ccf285;
+  --color-q-podium-3: #e3fce6;
+  --bg: #c4f3c9;
+  --surface: #ffffff;
+  --border: #bfe9c5;
+  --text: #0c1f13;
+  --green: #108652;
+  --green-dark: #0a6b40;
+}
+
+/* B) Folha & Lima — mais natural e quente: verde-limão sobre branco */
+:root[data-theme="folha"],
+[data-theme="folha"] {
+  --color-q-green: #108652;
+  --color-q-green-deep: #0a6b40;
+  --color-q-page: #dcefbd;
+  --color-q-frame: #ecf7d8;
+  --color-q-soft: #f1f8e3;
+  --color-q-row: #f5faea;
+  --color-q-line: #cfe2ae;
+  --color-q-green-tint: #e4f3c6;
+  --color-q-green-stripe: #93bd6e;
+  --color-q-ink: #14210d;
+  --color-q-muted: #5f724d;
+  --color-q-podium-1: #c4ea63;
+  --color-q-podium-2: #dff0a6;
+  --color-q-podium-3: #eef7d3;
+  --bg: #dcefbd;
+  --surface: #ffffff;
+  --border: #cfe2ae;
+  --text: #14210d;
+  --green: #108652;
+  --green-dark: #0a6b40;
+}
+
+/* C) Floresta — profundo e sóbrio: sálvia com verde-escuro e jade */
+:root[data-theme="floresta"],
+[data-theme="floresta"] {
+  --color-q-page: #b5d3c0;
+  --color-q-frame: #d6e8dc;
+  --color-q-soft: #e6f1ea;
+  --color-q-row: #edf5f0;
+  --color-q-line: #b7d2c1;
+  --color-q-green: #0b7344;
+  --color-q-green-deep: #075a34;
+  --color-q-green-tint: #cfe8d9;
+  --color-q-green-stripe: #6fae8c;
+  --color-q-ink: #0a1a11;
+  --color-q-muted: #4d6a5a;
+  --color-q-podium-1: #9bdcb8;
+  --color-q-podium-2: #cfe6b4;
+  --color-q-podium-3: #e3f0e8;
+  --bg: #b5d3c0;
+  --surface: #ffffff;
+  --border: #b7d2c1;
+  --text: #0a1a11;
+  --green: #0b7344;
+  --green-dark: #075a34;
+}
+
+/* ==========================================================================
+   TEMAS COM A PALETA DA MARCA (Stone)
+   Claro #BCE9A6 · Escuro #103024 · Vibrante #A5FA00
+   Claro 1 #D2FF7D · Claro 2 #87FF4B · Escuro 2 #007D00
+   ========================================================================== */
+
+/* D) Stone Claro — fundo no verde claro da marca, primário Verde escuro 2 */
+:root[data-theme="stone-claro"],
+[data-theme="stone-claro"] {
+  --color-q-page: #bce9a6;
+  --color-q-frame: #d7f2c6;
+  --color-q-soft: #e7f7dc;
+  --color-q-row: #eef9e6;
+  --color-q-line: #b2dd9a;
+  --color-q-green: #007d00;
+  --color-q-green-deep: #005f00;
+  --color-q-green-tint: #cdeebb;
+  --color-q-green-stripe: #86c97a;
+  --color-q-ink: #103024;
+  --color-q-muted: #49714f;
+  --color-q-podium-1: #87ff4b;
+  --color-q-podium-2: #d2ff7d;
+  --color-q-podium-3: #e7f8da;
+  --bg: #bce9a6;
+  --surface: #ffffff;
+  --border: #b2dd9a;
+  --text: #103024;
+  --green: #007d00;
+  --green-dark: #00461E;
+}
+
+/* E) Stone Escuro — Verde escuro #103024 como primário, lima vibrante de acento */
+:root[data-theme="stone-escuro"],
+[data-theme="stone-escuro"] {
+  --color-q-page: #dbebd2;
+  --color-q-frame: #ecf4e6;
+  --color-q-soft: #f1f7ec;
+  --color-q-row: #f5faf1;
+  --color-q-line: #d0e1c6;
+  --color-q-green: #103024;
+  --color-q-green-deep: #0a2018;
+  --color-q-on-green: #a5fa00;
+  --color-q-green-tint: #d9f0cb;
+  --color-q-green-stripe: #a9dc92;
+  --color-q-ink: #103024;
+  --color-q-muted: #56735c;
+  --color-q-podium-1: #bce9a6;
+  --color-q-podium-2: #d2ff7d;
+  --color-q-podium-3: #e9f4e1;
+  --bg: #dbebd2;
+  --surface: #ffffff;
+  --border: #d0e1c6;
+  --text: #103024;
+  --green: #103024;
+  --green-dark: #00461E;
+}
+
+/* F) Stone Vibrante — moldura clara, acentos em lima (#A5FA00) e Verde escuro 2 */
+:root[data-theme="stone-vibrante"],
+[data-theme="stone-vibrante"] {
+  --color-q-page: #cfe9bd;
+  --color-q-frame: #f4faee;
+  --color-q-soft: #edf6e5;
+  --color-q-row: #f3f9ee;
+  --color-q-line: #d9e8cc;
+  --color-q-green: #007d00;
+  --color-q-green-deep: #005f00;
+  --color-q-green-tint: #e7fbc0;
+  --color-q-green-stripe: #aee05c;
+  --color-q-ink: #103024;
+  --color-q-muted: #5d7454;
+  --color-q-podium-1: #a5fa00;
+  --color-q-podium-2: #bce9a6;
+  --color-q-podium-3: #e9f8dc;
+  --bg: #cfe9bd;
+  --surface: #ffffff;
+  --border: #d9e8cc;
+  --text: #103024;
+  --green: #00D700;
+  --green-dark: #00461E;
+}
+
+/* G) Stone Noite — moldura em Verde escuro #103024, cards brancos, acentos lima */
+:root[data-theme="stone-noite"],
+[data-theme="stone-noite"] {
+  --color-q-page: #0a2018;
+  --color-q-frame: #103024;
+  --color-q-on-frame: #f1fbe9;
+  --color-q-on-frame-muted: #a9cfa3;
+  --color-q-soft: #eaf6e1;
+  --color-q-row: #f1f9ea;
+  --color-q-line: #d3e8c8;
+  --color-q-green: #007d00;
+  --color-q-green-deep: #005f00;
+  --color-q-on-green: #d2ff7d;
+  --color-q-green-tint: #dcf4cc;
+  --color-q-green-stripe: #86c97a;
+  --color-q-ink: #103024;
+  --color-q-muted: #54745a;
+  --color-q-podium-1: #a5fa00;
+  --color-q-podium-2: #d2ff7d;
+  --color-q-podium-3: #bce9a6;
+  --bg: #0a2018;
+  --surface: #103024;
+  --border: #1a4233;
+  --text: #f1fbe9;
+  --green: #00D700;
+  --green-dark: #007d00;
+}
+
+/* H) Stone Lima — página toda em Verde claro 1 #D2FF7D, primário #007D00 */
+:root[data-theme="stone-lima"],
+[data-theme="stone-lima"] {
+  --color-q-page: #d2ff7d;
+  --color-q-frame: #e7ffae;
+  --color-q-soft: #f2ffd3;
+  --color-q-row: #f7ffe3;
+  --color-q-line: #cdee86;
+  --color-q-green: #007d00;
+  --color-q-green-deep: #005f00;
+  --color-q-green-tint: #e3fba8;
+  --color-q-green-stripe: #8fd83e;
+  --color-q-ink: #103024;
+  --color-q-muted: #55752f;
+  --color-q-podium-1: #87ff4b;
+  --color-q-podium-2: #a5fa00;
+  --color-q-podium-3: #f0ffc7;
+  --bg: #d2ff7d;
+  --surface: #ffffff;
+  --border: #cdee86;
+  --text: #103024;
+  --green: #007d00;
+  --green-dark: #00461E;
+}

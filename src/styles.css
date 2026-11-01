@@ -1,0 +1,237 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@config "../tailwind.config.js";
+@import "tw-animate-css";
+@import "./design-system/tokens.css";
+@import "./design-system/components.css";
+@import "./design-system/quixotic-shell.css";
+@import "./styles/quixotic-tokens.css";
+@import "./styles/themes.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans:
+    "Roobert", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "ABC Gravity", "Roobert", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Inter", monospace, sans-serif;
+  --font-data: "Inter", tabular-nums, sans-serif;
+
+  --color-green-900: #103024;
+  --color-green-800: #0b2219;
+  --color-green-700: #103024;
+  --color-green-600: #1a4d3a;
+  --color-green-500: #41d600;
+  --color-green-400: #94ea62;
+  --color-green-300: #bce9a6;
+  --color-green-100: #ddffe3;
+
+  --color-amber-500: #8a5a00;
+  --color-amber-600: #6b4600;
+
+  --color-ink-900: #2b2d2c;
+  --color-ink-600: #666d6a;
+  --color-ink-400: #808683;
+
+  --color-bg: #ecf1ef;
+  --color-surface: #ffffff;
+  --color-surface-2: #f4f7f6;
+  --color-border: #dfe7e4;
+  --color-danger: #b3263f;
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 28px;
+  --radius-2xl: 32px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 2px rgba(16, 48, 36, 0.04), 0 10px 28px rgba(16, 48, 36, 0.06);
+
+  --spacing-18: 72px;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-glow: var(--primary-glow);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-status-critical: var(--status-critical);
+  --color-status-warning: var(--status-warning);
+  --color-status-attention: var(--status-attention);
+  --color-status-healthy: var(--status-healthy);
+}
+
+/* Authentic StoneCo Design System (brand.stone.br) */
+:root {
+  --radius: 28px;
+
+  --background: var(--bg, #ecf1ef);
+  --foreground: var(--text, #2b2d2c);
+
+  --surface: #ffffff;
+  --surface-elevated: #ffffff;
+
+  --card: #ffffff;
+  --card-foreground: #2b2d2c;
+
+  --popover: #ffffff;
+  --popover-foreground: #2b2d2c;
+
+  --primary: #103024;
+  --primary-foreground: #ffffff;
+  --primary-glow: #41d600;
+
+  --secondary: #f4f7f6;
+  --secondary-foreground: #2b2d2c;
+
+  --muted: #f4f7f6;
+  --muted-foreground: #666d6a;
+
+  --accent: #94ea62;
+  --accent-foreground: #103024;
+
+  --destructive: #b3263f;
+  --destructive-foreground: #ffffff;
+
+  --border: #dfe7e4;
+  --input: #dfe7e4;
+  --ring: #41d600;
+
+  --status-critical: #b3263f;
+  --status-warning: #8a5a00;
+  --status-attention: #8a5a00;
+  --status-healthy: #1f7a1f;
+
+  --chart-1: #103024;
+  --chart-2: #94ea62;
+  --chart-3: #bce9a6;
+  --chart-4: #b3263f;
+  --chart-5: #2b2d2c;
+
+  --sidebar: #d7e1de;
+  --sidebar-foreground: #2b2d2c;
+  --sidebar-primary: #103024;
+  --sidebar-primary-foreground: #94ea62;
+  --sidebar-accent: #f4f7f6;
+  --sidebar-accent-foreground: #2b2d2c;
+  --sidebar-border: #dfe7e4;
+  --sidebar-ring: #41d600;
+
+  --gradient-primary: linear-gradient(135deg, #103024, #0b2219);
+  --gradient-glass: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+  --gradient-bg: #ecf1ef;
+
+  --shadow-glow: none;
+  --shadow-elevated: 0 10px 28px rgba(16, 48, 36, 0.06);
+  --shadow-glass: none;
+}
+
+@layer base {
+  * {
+    border-color: var(--border, #dfe7e4);
+  }
+
+  html,
+  body {
+    background-color: var(--bg, #ecf1ef);
+    color: var(--text, #2b2d2c);
+    font-family: var(--font-ui, "Roobert", "Inter", sans-serif);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display, "ABC Gravity", "Roobert", sans-serif);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* Números e dados tabulares */
+  .num {
+    font-family: var(--font-data, "Inter", monospace, sans-serif);
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--gray-1, #c7d5d1);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-3, #808683);
+    background-clip: content-box;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background-color: #ffffff;
+    border: 1px solid var(--border, #dfe7e4);
+    box-shadow: none;
+  }
+
+  .glass-strong {
+    background-color: #ffffff;
+    border: 1px solid var(--border, #dfe7e4);
+    box-shadow: none;
+  }
+
+  .glass-card {
+    background-color: #ffffff;
+    border: 1px solid var(--border, #dfe7e4);
+    box-shadow: none;
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 0 3px rgba(65, 214, 0, 0.4);
+  }
+
+  .text-gradient-primary {
+    color: var(--green-dark, #103024);
+  }
+
+  .grid-bg {
+    background-color: var(--bg, #ecf1ef);
+  }
+}

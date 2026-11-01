@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stone Design System</title>
+<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="components.css">
+<style>
+.wrap{max-width:1180px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:24px}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.grid{display:grid;gap:24px}.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px}
+.sw div{border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border);font-size:11px;background:#fff}
+.sw i{display:block;height:56px}.sw span{display:block;padding:6px 8px;line-height:1.3}.sw b{display:block;font-size:12px}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+h2.sec{font-size:var(--fs-xl);margin-bottom:12px}
+</style></head><body><div class="wrap">
+
+<div class="top"><nav class="navpill"><a href="#" aria-current="page">Dashboard</a><a href="#">Chamados</a><a href="#">Frota</a><a href="#">Relatórios</a></nav>
+<div class="row"><button class="btn btn--icon" aria-label="Buscar">⌕</button><span class="avatar">LB</span></div></div>
+
+<h1 class="h-hero">Stone Design System, <em>v1.0</em></h1>
+
+<section class="grid g3">
+  <div class="card card--dark kpi"><span class="label" style="color:#BFE8C9">Máquinas ativas</span><span class="kpi__value">1.284</span><span><span class="badge badge--trend">+12,8%</span></span></div>
+  <div class="card kpi"><span class="label">Chamados em SLA</span><span class="kpi__value">94,2%</span><div class="progress"><i style="width:94%"></i></div></div>
+  <div class="card card--brand kpi"><span class="label" style="color:var(--green-dark)">Entregas hoje</span><span class="kpi__value">3.945</span><span class="label" style="color:var(--green-dark)">vs. ontem +8%</span></div>
+</section>
+
+<section class="grid g3">
+  <div class="card" style="grid-column:span 2">
+    <div class="card__head"><div><div class="card__title">Chamados recentes</div><div class="label">Últimas 24 horas</div></div>
+    <div class="segmented"><button aria-pressed="true">Hoje</button><button aria-pressed="false">Semana</button></div></div>
+    <table class="table"><thead><tr><th>Chamado</th><th>Agente</th><th>Status</th><th>SLA</th></tr></thead><tbody>
+      <tr><td>#4821 · Troca de POS</td><td>Marcos S.</td><td><span class="badge badge--success">Concluído</span></td><td class="num">02:10h</td></tr>
+      <tr><td>#4822 · Bobina</td><td>Ana P.</td><td><span class="badge badge--warning">Em andamento</span></td><td class="num">00:45h</td></tr>
+      <tr><td>#4823 · Sem sinal</td><td>João R.</td><td><span class="badge badge--danger">Atrasado</span></td><td class="num">-01:20h</td></tr>
+      <tr><td>#4824 · Instalação</td><td>Carla M.</td><td><span class="badge badge--info">Agendado</span></td><td class="num">05:00h</td></tr>
+    </tbody></table>
+  </div>
+  <div class="card"><div class="card__title" style="margin-bottom:12px">Linha do tempo</div>
+    <ul class="timeline"><li><b>Chamado aberto</b><div class="label">08:12</div></li><li class="is-late"><b>Agente a caminho</b><div class="label">09:40 · atraso</div></li><li class="is-critical"><b>SLA estourado</b><div class="label">11:05</div></li></ul></div>
+</section>
+
+<section class="card"><h2 class="sec">Botões, campos e badges</h2>
+  <div class="row"><button class="btn btn--primary">Primário</button><button class="btn btn--strong">Forte</button><button class="btn">Neutro</button><button class="btn btn--ghost">Contorno</button><button class="btn" disabled>Desativado</button>
+  <span class="badge">Neutro</span><span class="badge badge--success">Sucesso</span><span class="badge badge--warning">Atenção</span><span class="badge badge--danger">Crítico</span><span class="badge badge--info">Info</span></div>
+  <div class="grid g3" style="margin-top:16px"><div class="field"><label>Código do POS</label><input class="input" placeholder="Ex.: 90210"></div><div class="field"><label>Agente</label><input class="input" value="Marcos S."></div></div>
+</section>
+
+<section class="card"><h2 class="sec">Cores da marca</h2><div class="sw" id="sw"></div></section>
+
+<section class="card"><h2 class="sec">Tipografia</h2>
+  <div style="font-family:var(--font-display);font-size:44px;line-height:1.1">ABC Gravity — títulos de impacto</div>
+  <div style="font-family:'ABC Gravity Condensed';font-size:36px;text-transform:uppercase;color:var(--green-dark)">Gravity Condensed para destaques</div>
+  <p style="font:600 24px var(--font-ui);margin:12px 0 0">Roobert — interface e textos</p>
+  <p class="num" style="font-size:24px;margin:8px 0 0">Inter — dados: R$ 78.989,09 · 1.284 · 94,2%</p>
+</section>
+</div>
+<script>
+const C=[["Verde Stone","--green"],["Verde Escuro","--green-dark"],["Verde escuro 2","--green-700"],["Verde vibrante","--lime"],["Verde claro 1","--green-200"],["Verde claro 2","--green-300"],["Preto","--black"],["Cinza 0","--gray-0"],["Cinza 1","--gray-1"],["Cinza 2","--gray-2"],["Cinza 3","--gray-3"],["Turquesa","--teal"],["Ciano","--cyan"],["Azul","--blue"],["Magenta","--magenta"],["Rosa","--pink"],["Vermelho","--red"],["Laranja","--orange"],["Amarelo","--yellow"],["Menta","--tint-mint"],["Lilás","--tint-lilac"],["Rosa suave","--tint-rose"],["Areia","--tint-sand"]];
+const s=getComputedStyle(document.documentElement);
+document.getElementById("sw").innerHTML=C.map(([n,v])=>`<div><i style="background:var(${v})"></i><span><b>${n}</b>${s.getPropertyValue(v).trim().toUpperCase()}</span></div>`).join("");
+document.querySelectorAll(".segmented").forEach(g=>g.addEventListener("click",e=>{if(e.target.tagName!=="BUTTON")return;g.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b===e.target))}));
+</script></body></html>
