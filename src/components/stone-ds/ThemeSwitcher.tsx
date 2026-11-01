@@ -54,11 +54,11 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-2 rounded-full bg-q-soft px-3 py-1.5 text-xs font-semibold text-q-ink transition-colors hover:bg-q-line focus-visible:outline-2 focus-visible:outline-q-green"
+        className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-q-soft px-3 py-1.5 text-xs font-semibold text-q-ink transition-colors hover:bg-q-line focus-visible:outline-2 focus-visible:outline-q-green"
         title="Alternar Tema Stone"
       >
         <Palette className="h-3.5 w-3.5 text-q-green" />
-        <span className="hidden sm:inline">Tema:</span>
+        <span className="hidden min-[1500px]:inline">Tema:</span>
         <span className="font-bold">
           {STONE_THEMES.find((t) => t.id === currentTheme)?.label || "Stone Vibrante"}
         </span>

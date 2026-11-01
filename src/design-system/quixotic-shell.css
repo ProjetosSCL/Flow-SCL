@@ -59,6 +59,7 @@ body {
 .qd-nav {
   display: none;
   margin: 0 auto;
+  flex: none;
 }
 .qd-tools {
   display: flex;
@@ -82,7 +83,9 @@ body {
 .qd-search {
   display: none;
   position: relative;
-  width: 240px;
+  width: clamp(140px, 13vw, 240px);
+  min-width: 120px;
+  flex: 0 1 auto;
 }
 .qd-base {
   display: none;
@@ -93,7 +96,7 @@ body {
   gap: var(--sp-2);
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1280px) {
   .qd-nav {
     display: flex;
   }
@@ -165,4 +168,33 @@ body {
     padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-3);
     top: 6px;
   }
+}
+
+/* ---- Correções de layout (topbar em zoom 100%) ----
+   Os links da pílula nunca quebram em duas linhas; em telas até 1500px
+   o espaçamento fica mais compacto para caber junto da busca e do tema. */
+.navpill.qd-nav a {
+  white-space: nowrap;
+}
+@media (max-width: 1499px) {
+  .navpill.qd-nav a {
+    padding: 8px 14px;
+  }
+}
+
+/* ---- Correções de foco: busca dentro dos filtros (cmdk) ----
+   A regra global :focus-visible desenha um anel verde (box-shadow) de 3px,
+   que ficava desproporcional e por cima do campo de busca do dropdown.
+   Aqui o anel é removido do input e o foco é indicado na linha inferior. */
+[cmdk-input]:focus,
+[cmdk-input]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+[cmdk-input-wrapper] {
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease;
+}
+[cmdk-input-wrapper]:focus-within {
+  border-bottom-color: var(--green-dark);
 }
