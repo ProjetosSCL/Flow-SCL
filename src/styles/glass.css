@@ -79,7 +79,7 @@
 /* ---- Cenário ---- */
 html[data-theme="stone-glass"],
 html[data-theme="stone-glass"] body {
-  background: #022916;
+  background: #f2fff9;
 }
 html[data-theme="stone-glass"] body::before {
   content: "";
