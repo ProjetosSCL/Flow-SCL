@@ -74,12 +74,14 @@ function MultiFilter({ label, options, value, onChange }: MultiProps) {
                     <div
                       className={cn(
                         "mr-2.5 h-4 w-4 rounded-md border border-[#DFE7E4] grid place-items-center text-[#103024] shrink-0 transition-colors",
-                        sel && "bg-[#94EA62] border-[#94EA62]",
+                        sel && "bg-[#103024] border-[#103024] text-white",
                       )}
                     >
                       {sel && <Check className="h-3 w-3 stroke-[3]" />}
                     </div>
-                    <span className="font-sans text-[#2B2D2C] leading-normal">{opt}</span>
+                    <span className={cn("font-sans text-[#2B2D2C] leading-normal", sel && "font-semibold")}>
+                      {opt}
+                    </span>
                   </CommandItem>
                 );
               })}
