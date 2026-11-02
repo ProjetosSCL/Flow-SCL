@@ -5,7 +5,7 @@ export const STONE_THEMES = [
   {
     id: "stone-glass",
     label: "Stone Glass",
-    desc: "Liquid glass: vidro fosco claro, com cartões em vidro verde",
+    desc: "Liquid glass: vidro fosco claro, com cartões em vidro verde-escuro",
   },
   {
     id: "",

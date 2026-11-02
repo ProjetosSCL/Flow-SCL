@@ -3,7 +3,7 @@
    Ativado com <html data-theme="stone-glass"> (é o tema padrão do sistema).
    Regra de cor:
    - Fundo, topbar, menus, filtros e barras: vidro CLARO (neutro).
-   - Somente os cartões marcados com .glass-green (KPIs etc.): vidro VERDE.
+   - Somente os cartões marcados com .glass-green (KPIs etc.): vidro VERDE ESCURO (#103024).
    - Popovers e diálogos: vidro claro mais opaco (leitura).
    Os componentes usam cores fixas (ex.: border-[#DFE7E4]); por isso parte das
    regras usa seletores de atributo para cobrir todos os cartões de uma vez.
@@ -33,18 +33,21 @@
   --glass-green-bg:
     linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.5) 0%,
-      rgba(255, 255, 255, 0.08) 38%,
-      rgba(255, 255, 255, 0) 62%,
-      rgba(255, 255, 255, 0.16) 100%
+      rgba(255, 255, 255, 0.24) 0%,
+      rgba(255, 255, 255, 0.04) 34%,
+      rgba(255, 255, 255, 0) 60%,
+      rgba(255, 255, 255, 0.08) 100%
     ),
-    linear-gradient(160deg, rgba(150, 236, 115, 0.8), rgba(52, 186, 96, 0.72));
+    linear-gradient(160deg, rgba(31, 92, 67, 0.88), rgba(16, 48, 36, 0.94));
   --glass-pop-bg: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(238, 249, 242, 0.86));
   --glass-edge:
     inset 0 1.5px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 2px rgba(255, 255, 255, 0.35),
     inset 0 0 22px rgba(255, 255, 255, 0.18);
   --glass-drop: 0 12px 32px rgba(16, 48, 36, 0.12), 0 2px 6px rgba(16, 48, 36, 0.06);
-  --glass-drop-green: 0 14px 34px rgba(18, 110, 60, 0.28), 0 2px 6px rgba(18, 110, 60, 0.14);
+  --glass-edge-green:
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.45), inset 0 -1px 2px rgba(0, 0, 0, 0.28),
+    inset 0 0 22px rgba(255, 255, 255, 0.06);
+  --glass-drop-green: 0 14px 34px rgba(16, 48, 36, 0.38), 0 2px 6px rgba(16, 48, 36, 0.18);
 
   /* Cenário: base clara com manchas suaves de menta (o vidro precisa de algo para refratar) */
   --glass-scene:
@@ -60,7 +63,7 @@
   :root[data-theme="stone-glass"] {
     --glass-filter: none;
     --glass-white-bg: rgba(255, 255, 255, 0.94);
-    --glass-green-bg: linear-gradient(160deg, rgba(150, 236, 115, 0.97), rgba(52, 186, 96, 0.97));
+    --glass-green-bg: linear-gradient(160deg, #1f5c43, #103024);
     --glass-pop-bg: rgba(255, 255, 255, 0.98);
   }
 }
@@ -68,7 +71,7 @@
   :root[data-theme="stone-glass"] {
     --glass-filter: none;
     --glass-white-bg: rgba(255, 255, 255, 0.96);
-    --glass-green-bg: linear-gradient(160deg, rgba(150, 236, 115, 0.98), rgba(52, 186, 96, 0.98));
+    --glass-green-bg: linear-gradient(160deg, #1f5c43, #103024);
     --glass-pop-bg: rgba(255, 255, 255, 0.99);
   }
 }
@@ -144,16 +147,24 @@ html[data-theme="stone-glass"] body::after {
   background: var(--glass-green-bg);
   -webkit-backdrop-filter: var(--glass-filter);
   backdrop-filter: var(--glass-filter);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: var(--glass-edge), var(--glass-drop-green);
-  color: #0c2a1f;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: var(--glass-edge-green), var(--glass-drop-green);
+  color: #ffffff;
 }
-:root[data-theme="stone-glass"] .glass-green [class*="text-[#666D6A]"],
-:root[data-theme="stone-glass"] .glass-green [class*="text-[#808683]"] {
-  color: #1f4a38;
+/* Textos sobre o verde escuro: claros. Ícones e selos com fundo próprio mantêm o texto escuro. */
+:root[data-theme="stone-glass"] .glass-green [class*="text-[#103024]"]:not([class*="bg-["]) {
+  color: #ffffff;
+}
+:root[data-theme="stone-glass"] .glass-green [class*="text-[#666D6A]"]:not([class*="bg-["]),
+:root[data-theme="stone-glass"] .glass-green [class*="text-[#808683]"]:not([class*="bg-["]) {
+  color: rgba(255, 255, 255, 0.72);
+}
+/* Ícone do tom "neutro" (fundo claro próprio) continua sólido */
+:root[data-theme="stone-glass"] .glass-green [class*="bg-[#F4F7F6]"] {
+  background-color: #f4f7f6;
 }
 :root[data-theme="stone-glass"] .glass-green [class*="border-[#DFE7E4]"] {
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 :root[data-theme="stone-glass"] [class*="rounded-[28px]"][class*="border-[#DFE7E4]"] {
