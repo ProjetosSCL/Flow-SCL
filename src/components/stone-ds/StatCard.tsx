@@ -11,7 +11,7 @@ interface StatCardProps {
  * Card compacto StoneCo DS (estilo "Weekly Revenue"): ícone, rótulo, valor grande e badge verde.
  */
 export const StatCard: React.FC<StatCardProps> = ({ icon, label, value, badge }) => (
-  <div className="flex items-center gap-4 rounded-[28px] bg-white border border-[#DFE7E4] p-5 shadow-none">
+  <div className="glass-green flex items-center gap-4 rounded-[28px] bg-white border border-[#DFE7E4] p-5 shadow-none">
     <div className="grid size-12 shrink-0 place-items-center rounded-full bg-[#DDFFE3] text-[#103024]">
       {icon}
     </div>
