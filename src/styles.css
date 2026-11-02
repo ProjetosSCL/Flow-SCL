@@ -7,6 +7,7 @@
 @import "./design-system/quixotic-shell.css";
 @import "./styles/quixotic-tokens.css";
 @import "./styles/themes.css";
+@import "./styles/glass.css";
 
 @custom-variant dark (&:is(.dark *));
 

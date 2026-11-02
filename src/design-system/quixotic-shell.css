@@ -199,30 +199,7 @@ body {
   border-bottom-color: var(--green-dark);
 }
 
-/* ---- Efeito "gelatina" ao selecionar / trocar de aba ----
-   A animação roda quando a aba passa a ser a ativa (aria-current="page").
-   Também há um "aperto" ao pressionar e volta elástica ao soltar.
-   Com prefers-reduced-motion a animação é desligada pela regra global. */
-@keyframes qd-jelly {
-  0% {
-    transform: scale(1, 1);
-  }
-  25% {
-    transform: scale(1.25, 0.78);
-  }
-  45% {
-    transform: scale(0.84, 1.2);
-  }
-  65% {
-    transform: scale(1.1, 0.92);
-  }
-  82% {
-    transform: scale(0.97, 1.04);
-  }
-  100% {
-    transform: scale(1, 1);
-  }
-}
+/* ---- Resposta ao clique nas abas (volta elástica) ---- */
 .navpill a,
 .rail__item {
   transition:
@@ -232,9 +209,5 @@ body {
 }
 .navpill a:active,
 .rail__item:active {
-  transform: scale(0.92);
-}
-.navpill a[aria-current="page"],
-.rail__item[aria-current="page"] {
-  animation: qd-jelly 0.6s ease-out;
+  transform: scale(0.94);
 }

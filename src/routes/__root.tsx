@@ -156,8 +156,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" data-theme="stone-glass" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('stone_theme');var h=document.documentElement;if(t===''){h.removeAttribute('data-theme')}else if(t){h.setAttribute('data-theme',t)}}catch(e){}",
+          }}
+        />
         <HeadContent />
       </head>
       <body>

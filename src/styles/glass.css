@@ -1,0 +1,220 @@
+/* ==========================================================================
+   glass.css — tema "Stone Glass" (liquid glass + cartões verdes)
+   Ativado com <html data-theme="stone-glass"> (é o tema padrão do sistema).
+   Estratégia:
+   1) Cenário: fundo em malha de verdes (o vidro precisa de algo para refratar).
+   2) Cartões: vidro verde fosco (blur + saturação + brilho especular nas bordas).
+   3) Barras e menus: vidro mais claro; popovers/diálogos mais opacos (leitura).
+   Os componentes usam cores fixas (ex.: border-[#DFE7E4]); por isso parte das
+   regras usa seletores de atributo para cobrir todos os cartões de uma vez.
+   ========================================================================== */
+
+:root[data-theme="stone-glass"] {
+  /* Tokens Tailwind (bg-q-*, text-q-*) */
+  --color-q-page: #cdeed0;
+  --color-q-frame: rgba(255, 255, 255, 0.22);
+  --color-q-card: rgba(206, 255, 186, 0.5);
+  --color-q-soft: rgba(255, 255, 255, 0.3);
+  --color-q-row: rgba(255, 255, 255, 0.22);
+  --color-q-line: rgba(255, 255, 255, 0.55);
+  --color-q-green-tint: rgba(200, 255, 175, 0.55);
+  --color-q-ink: #0c2a1f;
+  --color-q-muted: #35594a;
+  --color-q-on-frame: #0c2a1f;
+  --color-q-on-frame-muted: #35594a;
+
+  /* Tokens do design system */
+  --bg: #dff7d8;
+  --surface: rgba(255, 255, 255, 0.55);
+  --surface-2: rgba(255, 255, 255, 0.3);
+  --border: rgba(255, 255, 255, 0.55);
+  --text: #0c2a1f;
+  --text-muted: #35594a;
+  --shadow: 0 10px 30px rgba(4, 60, 34, 0.22);
+
+  /* Vidro */
+  --glass-filter: blur(22px) saturate(170%);
+  --glass-card-bg:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0.1) 36%,
+      rgba(255, 255, 255, 0) 60%,
+      rgba(255, 255, 255, 0.18) 100%
+    ),
+    linear-gradient(160deg, rgba(170, 250, 140, 0.46), rgba(70, 200, 110, 0.34));
+  --glass-pop-bg: linear-gradient(160deg, rgba(238, 255, 228, 0.82), rgba(190, 245, 170, 0.74));
+  --glass-edge:
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.85), inset 0 -1px 2px rgba(255, 255, 255, 0.3),
+    inset 0 0 22px rgba(255, 255, 255, 0.16);
+  --glass-drop: 0 14px 36px rgba(4, 60, 34, 0.28), 0 2px 6px rgba(4, 60, 34, 0.12);
+
+  /* Cenário (malha de verdes) */
+  --glass-scene:
+    radial-gradient(60vmax 50vmax at 12% 8%, #b6ff7a 0%, transparent 60%),
+    radial-gradient(55vmax 45vmax at 88% 12%, #3fe08f 0%, transparent 58%),
+    radial-gradient(60vmax 50vmax at 70% 92%, #94ea62 0%, transparent 60%),
+    radial-gradient(50vmax 45vmax at 5% 90%, #0f8a5a 0%, transparent 62%),
+    linear-gradient(160deg, #0f6e49 0%, #18a05f 45%, #7bdc5a 100%);
+}
+
+/* Sem suporte a blur, ou usuário pediu menos transparência: fundo quase sólido */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root[data-theme="stone-glass"] {
+    --glass-filter: none;
+    --glass-card-bg: linear-gradient(160deg, rgba(196, 245, 176, 0.95), rgba(150, 225, 150, 0.95));
+    --glass-pop-bg: rgba(232, 255, 224, 0.97);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root[data-theme="stone-glass"] {
+    --glass-filter: none;
+    --glass-card-bg: linear-gradient(160deg, rgba(196, 245, 176, 0.97), rgba(150, 225, 150, 0.97));
+    --glass-pop-bg: rgba(232, 255, 224, 0.99);
+  }
+}
+
+/* ---- Cenário ---- */
+html[data-theme="stone-glass"],
+html[data-theme="stone-glass"] body {
+  background: #0f6e49;
+}
+html[data-theme="stone-glass"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: var(--glass-scene);
+}
+/* Brilhos que derivam devagar: dão o aspecto "líquido" ao vidro */
+html[data-theme="stone-glass"] body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(28vmax 24vmax at 30% 30%, rgba(255, 255, 255, 0.28), transparent 70%),
+    radial-gradient(24vmax 22vmax at 75% 65%, rgba(208, 255, 150, 0.32), transparent 70%);
+  animation: glass-drift 26s ease-in-out infinite alternate;
+}
+@keyframes glass-drift {
+  from {
+    transform: translate3d(-4%, -3%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(5%, 4%, 0) scale(1.12);
+  }
+}
+/* Moldura externa: sem blur (blur aqui impediria o vidro dos cartões internos) */
+:root[data-theme="stone-glass"] .qd-screen {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+/* Tela cheia (tabela operacional): leva o cenário junto, senão o vidro borra preto */
+:root[data-theme="stone-glass"] :fullscreen {
+  background: var(--glass-scene);
+}
+
+/* ---- Cartões, topbar e rails: vidro verde ---- */
+:root[data-theme="stone-glass"]
+  :is(
+    .card,
+    .glass,
+    .glass-card,
+    .glass-strong,
+    .topbar,
+    .rail,
+    [class*="rounded-[28px]"][class*="border-[#DFE7E4]"]
+  ):not(
+    [class*="bg-[#103024]"],
+    [class*="bg-[#FFEAC0]"],
+    [class*="bg-[#FFD6DE]"],
+    [class*="bg-[#DEDEFF]"]
+  ) {
+  background: var(--glass-card-bg);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: var(--glass-edge), var(--glass-drop);
+  color: var(--text);
+}
+:root[data-theme="stone-glass"] [class*="rounded-[28px]"][class*="border-[#DFE7E4]"] {
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease;
+}
+
+/* Linhas e campos dentro dos cartões */
+:root[data-theme="stone-glass"] [class*="border-[#DFE7E4]"],
+:root[data-theme="stone-glass"] .border-border {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+:root[data-theme="stone-glass"] [class*="bg-[#F4F7F6]"] {
+  background-color: rgba(255, 255, 255, 0.38);
+}
+:root[data-theme="stone-glass"]
+  :is(.bg-white, [class*="bg-[#FFFFFF]"]):not([class*="rounded-[28px]"]) {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+/* Cabeçalho/colunas fixas da tabela: quase opacos para o scroll não vazar */
+:root[data-theme="stone-glass"] .bg-bg {
+  background-color: rgba(214, 248, 200, 0.92);
+}
+:root[data-theme="stone-glass"] :fullscreen.bg-bg {
+  background: var(--glass-scene);
+}
+/* Textos cinza ficam mais escuros sobre o vidro verde */
+:root[data-theme="stone-glass"] [class*="text-[#666D6A]"],
+:root[data-theme="stone-glass"] [class*="text-[#808683]"] {
+  color: #2f5446;
+}
+
+/* ---- Navegação ---- */
+:root[data-theme="stone-glass"] .navpill {
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.15);
+}
+:root[data-theme="stone-glass"] .navpill a {
+  color: #1f4a38;
+}
+:root[data-theme="stone-glass"] .navpill a[aria-current="page"] {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.6));
+  color: #0c2a1f;
+  box-shadow:
+    inset 0 1px 1px #fff,
+    0 6px 16px rgba(4, 60, 34, 0.25);
+}
+:root[data-theme="stone-glass"] .rail__item {
+  color: #1f4a38;
+}
+:root[data-theme="stone-glass"] .rail__item:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+:root[data-theme="stone-glass"] .rail__item[aria-current="page"] {
+  color: var(--green);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    0 6px 14px rgba(4, 60, 34, 0.3);
+}
+
+/* ---- Popovers, menus, diálogos e gavetas: vidro mais opaco (leitura) ---- */
+:root[data-theme="stone-glass"] [data-radix-popper-content-wrapper] > *,
+:root[data-theme="stone-glass"] [class*="rounded-q-card"][class*="bg-q-card"],
+:root[data-theme="stone-glass"] [role="dialog"],
+:root[data-theme="stone-glass"] [role="menu"] {
+  background: var(--glass-pop-bg);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--glass-edge), 0 18px 48px rgba(4, 60, 34, 0.35);
+  color: var(--text);
+}
+:root[data-theme="stone-glass"] [data-state="open"][class*="bg-black"] {
+  background: rgba(6, 50, 30, 0.35);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}

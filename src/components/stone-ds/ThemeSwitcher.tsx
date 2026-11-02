@@ -3,6 +3,11 @@ import { Palette, Check } from "lucide-react";
 
 export const STONE_THEMES = [
   {
+    id: "stone-glass",
+    label: "Stone Glass",
+    desc: "Liquid glass: vidro fosco em verde com fundo em malha de verdes",
+  },
+  {
     id: "",
     label: "StoneCo DS (Padrão)",
     desc: "brand.stone.br · Primário #103024, acento #94EA62, fundo #ECF1EF",
@@ -32,9 +37,10 @@ export const STONE_THEMES = [
 export function ThemeSwitcher({ className = "" }: { className?: string }) {
   const [currentTheme, setCurrentTheme] = useState<string>(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("stone_theme") || "";
+      // Sem escolha salva, o padrão do sistema é o Stone Glass.
+      return localStorage.getItem("stone_theme") ?? "stone-glass";
     }
-    return "";
+    return "stone-glass";
   });
 
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +51,7 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
       localStorage.setItem("stone_theme", currentTheme);
     } else {
       document.documentElement.removeAttribute("data-theme");
-      localStorage.removeItem("stone_theme");
+      localStorage.setItem("stone_theme", "");
     }
   }, [currentTheme]);
 
@@ -60,7 +66,7 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
         <Palette className="h-3.5 w-3.5 text-q-green" />
         <span className="hidden min-[1500px]:inline">Tema:</span>
         <span className="font-bold">
-          {STONE_THEMES.find((t) => t.id === currentTheme)?.label || "Stone Vibrante"}
+          {STONE_THEMES.find((t) => t.id === currentTheme)?.label || "Stone Glass"}
         </span>
       </button>
 
