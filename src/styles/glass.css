@@ -11,7 +11,7 @@
 
 :root[data-theme="stone-glass"] {
   /* Tokens Tailwind (bg-q-*, text-q-*) */
-  --color-q-page: #dbe5e0;
+  --color-q-page: #eef5f0;
   --color-q-frame: rgba(255, 255, 255, 0.35);
   --color-q-card: rgba(255, 255, 255, 0.62);
   --color-q-soft: rgba(255, 255, 255, 0.5);
@@ -20,7 +20,7 @@
   --color-q-green-tint: rgba(200, 255, 175, 0.55);
 
   /* Tokens do design system */
-  --bg: #d6e1db;
+  --bg: #e9f4ec;
   --surface: rgba(255, 255, 255, 0.62);
   --surface-2: rgba(255, 255, 255, 0.5);
   --border: rgba(16, 48, 36, 0.12);
@@ -33,12 +33,12 @@
   --glass-green-bg:
     linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.24) 0%,
       rgba(255, 255, 255, 0.04) 34%,
       rgba(255, 255, 255, 0) 60%,
-      rgba(255, 255, 255, 0.06) 100%
+      rgba(255, 255, 255, 0.08) 100%
     ),
-    linear-gradient(160deg, #1f5c43, #103024);
+    linear-gradient(160deg, rgba(31, 92, 67, 0.88), rgba(16, 48, 36, 0.94));
   --glass-pop-bg: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(238, 249, 242, 0.86));
   --glass-edge:
     inset 0 1.5px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 2px rgba(255, 255, 255, 0.35),
@@ -49,13 +49,13 @@
     inset 0 0 22px rgba(255, 255, 255, 0.06);
   --glass-drop-green: 0 14px 34px rgba(16, 48, 36, 0.38), 0 2px 6px rgba(16, 48, 36, 0.18);
 
-  /* Cenário: cinza esverdeado com manchas suaves (o vidro precisa de algo para refratar) */
+  /* Cenário: base clara com manchas suaves de menta (o vidro precisa de algo para refratar) */
   --glass-scene:
-    radial-gradient(52vmax 42vmax at 8% 4%, #cfdad4 0%, transparent 62%),
-    radial-gradient(46vmax 40vmax at 92% 8%, #c6d5ce 0%, transparent 62%),
-    radial-gradient(56vmax 46vmax at 78% 96%, #d3dfd8 0%, transparent 62%),
-    radial-gradient(44vmax 40vmax at 4% 92%, #c3d3ca 0%, transparent 64%),
-    linear-gradient(160deg, #e3ebe7 0%, #d3ded8 100%);
+    radial-gradient(52vmax 42vmax at 8% 4%, #c9f7bd 0%, transparent 62%),
+    radial-gradient(46vmax 40vmax at 92% 8%, #b7efdc 0%, transparent 62%),
+    radial-gradient(56vmax 46vmax at 78% 96%, #d9f9b8 0%, transparent 62%),
+    radial-gradient(44vmax 40vmax at 4% 92%, #bfeccf 0%, transparent 64%),
+    linear-gradient(160deg, #f4f9f6 0%, #e8f2ec 100%);
 }
 
 /* Sem suporte a blur, ou usuário pediu menos transparência: fundos quase sólidos */
@@ -79,7 +79,7 @@
 /* ---- Cenário ---- */
 html[data-theme="stone-glass"],
 html[data-theme="stone-glass"] body {
-  background: #f2fff9;
+  background: #eef5f0;
 }
 html[data-theme="stone-glass"] body::before {
   content: "";
@@ -96,8 +96,8 @@ html[data-theme="stone-glass"] body::after {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(26vmax 22vmax at 30% 30%, rgba(140, 170, 155, 0.3), transparent 70%),
-    radial-gradient(24vmax 22vmax at 75% 65%, rgba(175, 198, 188, 0.36), transparent 70%);
+    radial-gradient(26vmax 22vmax at 30% 30%, rgba(148, 234, 98, 0.3), transparent 70%),
+    radial-gradient(24vmax 22vmax at 75% 65%, rgba(140, 234, 212, 0.34), transparent 70%);
   animation: glass-drift 26s ease-in-out infinite alternate;
 }
 @keyframes glass-drift {
@@ -147,7 +147,7 @@ html[data-theme="stone-glass"] body::after {
   background: var(--glass-green-bg);
   -webkit-backdrop-filter: var(--glass-filter);
   backdrop-filter: var(--glass-filter);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   box-shadow: var(--glass-edge-green), var(--glass-drop-green);
   color: #ffffff;
 }
@@ -186,7 +186,7 @@ html[data-theme="stone-glass"] body::after {
 }
 /* Cabeçalho/colunas fixas da tabela: quase opacos para o scroll não vazar */
 :root[data-theme="stone-glass"] .bg-bg {
-  background-color: rgba(222, 232, 227, 0.95);
+  background-color: rgba(228, 246, 233, 0.94);
 }
 :root[data-theme="stone-glass"] :fullscreen.bg-bg {
   background: var(--glass-scene);
