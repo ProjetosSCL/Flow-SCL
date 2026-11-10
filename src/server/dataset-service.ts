@@ -47,6 +47,7 @@ export interface ServerEnv {
 
 const DEFAULT_PASSWORD = "scl2026";
 const KV_KEY = "fieldops_central_dataset_v1";
+const VERCEL_KV_KEY = "flow_scl:central_dataset:v1";
 
 // In-memory runtime cache
 let memoryCache: StoredDataset | null = null;
@@ -59,6 +60,52 @@ function getExpectedPassword(env?: ServerEnv): string {
     return process.env.IMPORT_PASSWORD.trim();
   }
   return DEFAULT_PASSWORD;
+}
+
+function getUpstashConfig(env?: ServerEnv) {
+  const get = (key: string) => {
+    const fromEnv = env?.[key];
+    if (typeof fromEnv === "string" && fromEnv.trim()) return fromEnv.trim();
+    if (typeof process !== "undefined") {
+      const fromProcess = process.env?.[key];
+      if (fromProcess?.trim()) return fromProcess.trim();
+    }
+    return "";
+  };
+  const url =
+    get("UPSTASH_REDIS_REST_URL") || get("KV_REST_API_URL");
+  const token =
+    get("UPSTASH_REDIS_REST_TOKEN") || get("KV_REST_API_TOKEN");
+  return url && token ? { url: url.replace(/\/+$/, ""), token } : null;
+}
+
+function isVercelRuntime() {
+  return typeof process !== "undefined" && process.env?.VERCEL === "1";
+}
+
+async function upstashCommand<T>(
+  env: ServerEnv | undefined,
+  command: string,
+  ...args: string[]
+): Promise<T> {
+  const config = getUpstashConfig(env);
+  if (!config) throw new Error("Armazenamento Redis/Upstash não configurado.");
+  const response = await fetch(config.url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${config.token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify([command, ...args]),
+  });
+  const result = (await response.json().catch(() => ({}))) as {
+    result?: T;
+    error?: string;
+  };
+  if (!response.ok || result.error) {
+    throw new Error(result.error || `Falha no armazenamento Redis (HTTP ${response.status}).`);
+  }
+  return result.result as T;
 }
 
 // Check for file system persistence in Node environments
@@ -83,9 +130,9 @@ async function readFromFile(): Promise<StoredDataset | null> {
   return null;
 }
 
-async function writeToFile(data: StoredDataset): Promise<void> {
+async function writeToFile(data: StoredDataset): Promise<boolean> {
   if (typeof process === "undefined" || !process.versions?.node) {
-    return;
+    return false;
   }
   try {
     const fs = await import("node:fs");
@@ -96,14 +143,16 @@ async function writeToFile(data: StoredDataset): Promise<void> {
     }
     const filePath = path.resolve(dirPath, "central-dataset.json");
     fs.writeFileSync(filePath, JSON.stringify(data), "utf-8");
+    return true;
   } catch (err) {
     console.warn("[DatasetService] Falha ao persistir no arquivo local:", err);
+    return false;
   }
 }
 
-async function deleteFromFile(): Promise<void> {
+async function deleteFromFile(): Promise<boolean> {
   if (typeof process === "undefined" || !process.versions?.node) {
-    return;
+    return false;
   }
   try {
     const fs = await import("node:fs");
@@ -112,8 +161,10 @@ async function deleteFromFile(): Promise<void> {
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
     }
+    return true;
   } catch (err) {
     console.warn("[DatasetService] Falha ao deletar arquivo local:", err);
+    return false;
   }
 }
 
@@ -141,19 +192,33 @@ export async function loadCentralDataset(env?: ServerEnv): Promise<StoredDataset
     }
   }
 
-  // 2. Try in-memory cache
+  // 2. Vercel Marketplace Redis (Upstash REST API)
+  if (getUpstashConfig(env)) {
+    const raw = await upstashCommand<string | null>(env, "GET", VERCEL_KV_KEY);
+    if (raw) {
+      const data = JSON.parse(raw) as StoredDataset;
+      if (data && Array.isArray(data.rows) && data.rows.length > 0) {
+        memoryCache = data;
+        return data;
+      }
+    }
+  }
+
+  // 3. Try in-memory cache
   if (memoryCache && memoryCache.rows.length > 0) {
     return memoryCache;
   }
 
-  // 3. Try local file storage (Node/Docker)
-  const fileData = await readFromFile();
-  if (fileData) {
-    memoryCache = fileData;
-    return fileData;
+  // 4. Local file storage is suitable for development, not Vercel functions.
+  if (!isVercelRuntime()) {
+    const fileData = await readFromFile();
+    if (fileData) {
+      memoryCache = fileData;
+      return fileData;
+    }
   }
 
-  // 4. Fallback to initial seed
+  // 5. Fallback to initial seed
   const defaultSeed = getSeedDataset();
   memoryCache = defaultSeed;
   return defaultSeed;
@@ -187,20 +252,38 @@ export async function saveCentralDataset(
     rows,
   };
 
-  // Update memory
-  memoryCache = newDataset;
-
-  // Persist to Cloudflare KV if available
+  // Persist to Cloudflare KV if available.
   if (env?.FIELDOPS_KV) {
     try {
       await env.FIELDOPS_KV.put(KV_KEY, JSON.stringify(newDataset));
     } catch (err) {
       console.error("[DatasetService] Erro ao salvar em Cloudflare KV:", err);
+      return { success: false, error: "Não foi possível salvar a base no armazenamento central." };
     }
+  } else if (getUpstashConfig(env)) {
+    try {
+      const result = await upstashCommand<string>(
+        env,
+        "SET",
+        VERCEL_KV_KEY,
+        JSON.stringify(newDataset),
+      );
+      if (result !== "OK") throw new Error("O Redis não confirmou a gravação.");
+    } catch (err) {
+      console.error("[DatasetService] Erro ao salvar em Redis/Upstash:", err);
+      return { success: false, error: "Não foi possível salvar a base no armazenamento central." };
+    }
+  } else if (isVercelRuntime()) {
+    return {
+      success: false,
+      error: "Armazenamento persistente não configurado na Vercel. Conecte um Redis/Upstash ao projeto.",
+    };
+  } else if (!(await writeToFile(newDataset))) {
+    return { success: false, error: "Não foi possível persistir a base neste servidor." };
   }
 
-  // Persist to local file system
-  await writeToFile(newDataset);
+  // Update memory only after durable storage succeeds.
+  memoryCache = newDataset;
 
   return {
     success: true,
@@ -221,17 +304,31 @@ export async function resetCentralDataset(
   }
 
   const seedData = getSeedDataset();
-  memoryCache = seedData;
 
   if (env?.FIELDOPS_KV) {
     try {
       await env.FIELDOPS_KV.delete(KV_KEY);
     } catch (err) {
       console.error("[DatasetService] Erro ao resetar Cloudflare KV:", err);
+      return { success: false, error: "Não foi possível restaurar a base no armazenamento central." };
     }
+  } else if (getUpstashConfig(env)) {
+    try {
+      await upstashCommand(env, "DEL", VERCEL_KV_KEY);
+    } catch (err) {
+      console.error("[DatasetService] Erro ao resetar Redis/Upstash:", err);
+      return { success: false, error: "Não foi possível restaurar a base no armazenamento central." };
+    }
+  } else if (isVercelRuntime()) {
+    return {
+      success: false,
+      error: "Armazenamento persistente não configurado na Vercel. Conecte um Redis/Upstash ao projeto.",
+    };
+  } else if (!(await deleteFromFile())) {
+    return { success: false, error: "Não foi possível restaurar a base neste servidor." };
   }
 
-  await deleteFromFile();
+  memoryCache = seedData;
 
   return {
     success: true,
