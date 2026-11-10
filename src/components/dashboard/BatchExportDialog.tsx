@@ -27,8 +27,9 @@ import { cn } from "@/lib/utils";
 import { captureExpandedTable, CaptureCancelledError } from "@/lib/capture-table";
 
 interface Pair {
+  cidade: string;
+  estado: string;
   contratante: string;
-  prestador: string;
   count: number;
   key: string;
   filename: string;
@@ -66,22 +67,25 @@ export function BatchExportDialog({ open, onOpenChange, filters }: Props) {
   const pairs = useMemo<Pair[]>(() => {
     const m = new Map<string, Pair>();
     filtered.forEach((o) => {
-      if (!o.contratante || !o.prestador) return;
-      const key = `${o.contratante}||${o.prestador}`;
+      if (!o.contratante || !o.cidade || !o.estado) return;
+      const key = `${o.estado}||${o.cidade}||${o.contratante}`;
       const cur = m.get(key);
       if (cur) cur.count++;
       else
         m.set(key, {
+          cidade: o.cidade,
+          estado: o.estado,
           contratante: o.contratante,
-          prestador: o.prestador,
           count: 1,
           key,
-          filename: `${slug(o.contratante)}-${slug(o.prestador)}-${today()}.png`,
+          filename: `${slug(o.estado)}-${slug(o.cidade)}-${slug(o.contratante)}-${today()}.png`,
         });
     });
     return [...m.values()].sort(
       (a, b) =>
-        a.contratante.localeCompare(b.contratante) || a.prestador.localeCompare(b.prestador),
+        a.estado.localeCompare(b.estado) ||
+        a.cidade.localeCompare(b.cidade) ||
+        a.contratante.localeCompare(b.contratante),
     );
   }, [filtered]);
 
@@ -134,7 +138,7 @@ export function BatchExportDialog({ open, onOpenChange, filters }: Props) {
             setLargeWarning({
               cityCount,
               height,
-              pairName: `${pair.contratante} × ${pair.prestador}`,
+              pairName: `${pair.estado} - ${pair.cidade} -- ${pair.contratante}`,
               resolve,
             });
           });
@@ -232,7 +236,8 @@ export function BatchExportDialog({ open, onOpenChange, filters }: Props) {
     ? {
         ...filters,
         contratante: [renderPair.contratante],
-        prestador: [renderPair.prestador],
+        cidade: [renderPair.cidade],
+        estado: [renderPair.estado],
       }
     : filters;
 
@@ -245,7 +250,7 @@ export function BatchExportDialog({ open, onOpenChange, filters }: Props) {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Camera className="h-4 w-4" />
-              Prints diários por Contratante × Prestador
+              Prints diários por Franquia × Contratante
             </DialogTitle>
             <DialogDescription>
               {pairs.length} combinações detectadas nos dados filtrados. Desmarque as que não quiser
@@ -282,8 +287,8 @@ export function BatchExportDialog({ open, onOpenChange, filters }: Props) {
                       />
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-medium truncate">
-                          {p.contratante} <span className="text-muted-foreground">—</span>{" "}
-                          {p.prestador}
+                          {p.estado} - {p.cidade} <span className="text-muted-foreground">--</span>{" "}
+                          {p.contratante}
                         </div>
                         <div className="text-[11px] text-muted-foreground tabular-nums">
                           {p.count} OS · {p.filename}
@@ -390,7 +395,7 @@ export function BatchExportDialog({ open, onOpenChange, filters }: Props) {
             >
               <div style={{ marginBottom: 8 }}>
                 <div style={{ fontSize: 18, fontWeight: 700 }}>
-                  {renderPair.contratante} — {renderPair.prestador}
+                  {renderPair.estado} - {renderPair.cidade} -- {renderPair.contratante}
                 </div>
                 <div style={{ fontSize: 12, opacity: 0.7 }}>
                   {today()} · {renderPair.count} OS
@@ -492,7 +497,7 @@ function ShareAssistant({
 
       <div className="rounded-xl border border-border/80 p-3 bg-bg">
         <div className="text-sm font-semibold mb-2 font-display text-ink-900">
-          {g.contratante} — {g.prestador}
+          {g.estado} - {g.cidade} -- {g.contratante}
         </div>
         <img
           src={g.dataUrl}

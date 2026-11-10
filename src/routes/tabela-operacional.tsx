@@ -406,7 +406,7 @@ function TabelaOperacionalPage() {
               size="sm"
               onClick={() => setBatchOpen(true)}
               className="min-h-[40px] h-10 sm:h-8 sm:min-h-0 gap-1.5 rounded-full bg-green-800 hover:bg-green-700 text-white px-4 shrink-0 font-sans font-semibold shadow-xs touch-manipulation"
-              title="Gerar prints por Contratante × Prestador e compartilhar no WhatsApp"
+              title="Gerar prints por Franquia × Contratante e compartilhar no WhatsApp"
             >
               <Share2 className="h-4 w-4" />
               <span className="text-xs">Exportar prints</span>
