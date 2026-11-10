@@ -27,8 +27,7 @@ import { cn } from "@/lib/utils";
 import { captureExpandedTable, CaptureCancelledError } from "@/lib/capture-table";
 
 interface Pair {
-  cidade: string;
-  estado: string;
+  prestador: string;
   contratante: string;
   count: number;
   key: string;
@@ -55,6 +54,10 @@ function slug(s: string) {
     .toUpperCase();
 }
 
+function franchiseLabel(prestador: string) {
+  return prestador.replace(/^([A-Z]{2})\s*[·-]\s*/i, "$1 - ");
+}
+
 function today() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
@@ -67,25 +70,22 @@ export function BatchExportDialog({ open, onOpenChange, filters }: Props) {
   const pairs = useMemo<Pair[]>(() => {
     const m = new Map<string, Pair>();
     filtered.forEach((o) => {
-      if (!o.contratante || !o.cidade || !o.estado) return;
-      const key = `${o.estado}||${o.cidade}||${o.contratante}`;
+      if (!o.prestador || !o.contratante) return;
+      const key = `${o.prestador}||${o.contratante}`;
       const cur = m.get(key);
       if (cur) cur.count++;
       else
         m.set(key, {
-          cidade: o.cidade,
-          estado: o.estado,
+          prestador: o.prestador,
           contratante: o.contratante,
           count: 1,
           key,
-          filename: `${slug(o.estado)}-${slug(o.cidade)}-${slug(o.contratante)}-${today()}.png`,
+          filename: `${slug(o.prestador)}-${slug(o.contratante)}-${today()}.png`,
         });
     });
     return [...m.values()].sort(
       (a, b) =>
-        a.estado.localeCompare(b.estado) ||
-        a.cidade.localeCompare(b.cidade) ||
-        a.contratante.localeCompare(b.contratante),
+        a.prestador.localeCompare(b.prestador) || a.contratante.localeCompare(b.contratante),
     );
   }, [filtered]);
 
@@ -138,7 +138,7 @@ export function BatchExportDialog({ open, onOpenChange, filters }: Props) {
             setLargeWarning({
               cityCount,
               height,
-              pairName: `${pair.estado} - ${pair.cidade} -- ${pair.contratante}`,
+              pairName: `${franchiseLabel(pair.prestador)} -- ${pair.contratante}`,
               resolve,
             });
           });
@@ -235,9 +235,8 @@ export function BatchExportDialog({ open, onOpenChange, filters }: Props) {
   const captureFilters: Filters = renderPair
     ? {
         ...filters,
+        prestador: [renderPair.prestador],
         contratante: [renderPair.contratante],
-        cidade: [renderPair.cidade],
-        estado: [renderPair.estado],
       }
     : filters;
 
@@ -287,7 +286,7 @@ export function BatchExportDialog({ open, onOpenChange, filters }: Props) {
                       />
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-medium truncate">
-                          {p.estado} - {p.cidade} <span className="text-muted-foreground">--</span>{" "}
+                          {franchiseLabel(p.prestador)} <span className="text-muted-foreground">--</span>{" "}
                           {p.contratante}
                         </div>
                         <div className="text-[11px] text-muted-foreground tabular-nums">
@@ -395,7 +394,7 @@ export function BatchExportDialog({ open, onOpenChange, filters }: Props) {
             >
               <div style={{ marginBottom: 8 }}>
                 <div style={{ fontSize: 18, fontWeight: 700 }}>
-                  {renderPair.estado} - {renderPair.cidade} -- {renderPair.contratante}
+                  {franchiseLabel(renderPair.prestador)} -- {renderPair.contratante}
                 </div>
                 <div style={{ fontSize: 12, opacity: 0.7 }}>
                   {today()} · {renderPair.count} OS
@@ -497,7 +496,7 @@ function ShareAssistant({
 
       <div className="rounded-xl border border-border/80 p-3 bg-bg">
         <div className="text-sm font-semibold mb-2 font-display text-ink-900">
-          {g.estado} - {g.cidade} -- {g.contratante}
+          {franchiseLabel(g.prestador)} -- {g.contratante}
         </div>
         <img
           src={g.dataUrl}
